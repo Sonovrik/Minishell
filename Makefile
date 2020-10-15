@@ -32,7 +32,7 @@ DELETE_COLOR=\x1b[31;01m
 
 LIBFT = $(LIBFTDIR)libft.a
 
-FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -Wall -Werror -Wextra
 
 all: $(NAME)
 

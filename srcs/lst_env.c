@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   lst_env.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lmidori <lmidori@student.21-school.ru>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/01 21:19:40 by lmidori           #+#    #+#             */
-/*   Updated: 2020/10/10 21:47:04 by lmidori          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "parser.h"
 
 t_env				*new_key_value(char *str, int visible)
@@ -24,7 +12,7 @@ t_env				*new_key_value(char *str, int visible)
 	while (str[count] != '\0' && str[count] != '=')
 		count++;
 	str[count] = '\0';
-	if (!(new_elem->key_value = (char **)malloc(sizeof(char *) * 3)))
+	if (!(new_elem->key_value = (char **)xmalloc(sizeof(char *) * 3)))
 		return (NULL);
 	new_elem->key_value[0] = ft_strdup(str);
 	if (str[count + 1] == '\0')

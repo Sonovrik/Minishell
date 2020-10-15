@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   redirect.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lmidori <lmidori@student.21-school.ru>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/10 18:18:55 by lmidori           #+#    #+#             */
-/*   Updated: 2020/10/10 18:18:58 by lmidori          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "parser.h"
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -92,7 +80,7 @@ void	redirect(t_head_struct *head_struct, char **str, t_list_args *args)
 	{
 		if (head_struct->all.spec && head_struct->last_spec == NULL)
 			head_struct->last_spec = ft_strdup(head_struct->all.spec);
-		head_struct->copy_all = malloc(sizeof(t_all));
+		head_struct->copy_all = xmalloc(sizeof(t_all));
 		if (!head_struct->copy_all)
 			return ;
 		get_copy_all(&head_struct->all, head_struct->copy_all, args);

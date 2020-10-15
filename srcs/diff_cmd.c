@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   diff_cmd.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lmidori <lmidori@student.21-school.ru>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/03 22:29:14 by lmidori           #+#    #+#             */
-/*   Updated: 2020/10/12 16:50:37 by lmidori          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "parser.h"
 
 char				**init_envp(t_env *env)
@@ -60,7 +48,8 @@ int					exec_if_in_bin(t_head_struct *head_struct,
 	i = 0;
 	while (head_struct->bin && head_struct->bin[i])
 	{
-		dir = opendir(head_struct->bin[i]);
+		if (!(dir = opendir(head_struct->bin[i])))
+			return (0);
 		while ((entry = readdir(dir)) != NULL)
 		{
 			if ((ft_strncmp(str2[0], entry->d_name,

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lmidori <lmidori@student.21-school.ru>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/12 23:26:11 by lmidori           #+#    #+#             */
-/*   Updated: 2020/10/12 23:27:02 by lmidori          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "parser.h"
 
 void	sigquit(int sig)
@@ -31,7 +19,7 @@ void	sigint(int sig)
 	if (g_str1 && ft_strlen(g_str1))
 	{
 		free(g_str1);
-		g_str1 = (char *)malloc(sizeof(char));
+		g_str1 = (char *)xmalloc(sizeof(char));
 		g_str1[0] = '\0';
 	}
 	g_error = 1;
