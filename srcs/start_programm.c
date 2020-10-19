@@ -19,7 +19,11 @@ int			check_stat(char **cmd_arg, char *tmp)
 {
 	struct stat st;
 
-	stat(tmp, &st);
+	if (stat(tmp, &st) == -1)
+	{
+		free(tmp);
+		return (0);
+	}
 	if (!(S_ISREG(st.st_mode) == 1 && (st.st_mode & S_IXUSR)))
 	{
 		if (!(S_ISREG(st.st_mode)))
@@ -46,6 +50,7 @@ void		exec_error(int *status, char **cmd_arg, char **env, char *tmp)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
+	signal(SIGTERM, SIG_DFL);
 	if ((*status = execve(tmp, cmd_arg, env)) == -1)
 	{
 		if (ft_strchr(cmd_arg[0], '/') != NULL)
@@ -75,6 +80,11 @@ int			exec_fork(char **cmd_arg, char **env, char *tmp)
 				g_error = 130;
 			if (WTERMSIG(status) == 3)
 				g_error = 131;
+			if (WTERMSIG(status) == 15)
+			{
+				ft_putstr_fd("Terminated: 15", 2);
+				g_error = 143;
+			}	
 			write(1, "\n", 1);
 		}
 		else
@@ -95,6 +105,7 @@ int			start_programm(char *path_bin, char **env, char **cmd_arg)
 		return (flag);
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
+	signal(SIGTERM, SIG_IGN);
 	exec_fork(cmd_arg, env, tmp);
 	free(tmp);
 	return (1);
